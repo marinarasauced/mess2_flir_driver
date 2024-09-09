@@ -1,0 +1,4 @@
+cameras:
+  - name: "flir1"
+    type: "flir_a70"
+    serial: "01234567"

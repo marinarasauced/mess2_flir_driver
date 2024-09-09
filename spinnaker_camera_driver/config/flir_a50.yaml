@@ -1,0 +1,54 @@
+#
+# config file for FLIR A50/A70 cameras (GigE)
+#
+# this file maps the ROS2 parameters to the corresponding Spinnaker "nodes" in the camera.
+# this file is based on the config files provided in the ros-drivers/flir_camera_driver:humble-devel directory.
+
+parameters:
+  #
+  # -------- image format control
+  #
+  - name: pixel_format
+    type: enum
+    # default is "Mono8"
+    node: ImageFormatControl/PixelFormat
+  - name: image_width
+    type: int
+    node: ImageFormatControl/Width
+  - name: image_height
+    type: int
+    node: ImageFormatControl/Height
+  - name: offset_x # offset must come after image width reduction!
+    type: int
+    node: ImageFormatControl/OffsetX
+  - name: offset_y
+    type: int
+    node: ImageFormatControl/OffsetY
+
+  #
+  # -------- transport layer control (GigE)
+  #
+  - name: gev_scps_packet_size
+    type: int
+    # default is 576. Other cameras had the option to set to 9000 to enable jumbo frames, ensure NIC MTU set >= 9000
+    node: TransportLayerControl/GevSCPSPacketSize
+
+  # 
+  # ---------- FLIR Camera Control
+  #
+  - name: nuc_mode # Non-uniformity Control closes the shutter and recalibrates
+    type: enum
+    # valid values: "Automatic" "External" "Manual"
+    node: CameraControl/NUCMode
+
+  # 
+  # ---------- FLIR Video Control
+  #
+  - name: image_adjust_method
+    type: enum
+    # valid values: "PlateauHistogram" "OnceBright" "AutoBright" "Manual" "Linear"
+    node: Mono8VideoControl/ImageAdjustMethod
+  - name: video_orientation
+    type: enum
+    # valid values: "Normal" "Invert" "Revert" "InvertRevert"
+    node: Mono8VideoControl/VideoOrientation
