@@ -25,6 +25,25 @@ parameters:
     type: int
     node: ImageFormatControl/OffsetY
 
+
+  #
+  # -------- acquisition control
+  #
+  - name: exposure_auto
+    type: enum
+    # valid values are "Off", "Continuous"
+    node: AcquisitionControl/ExposureAuto
+  - name: exposure_time
+    type: float
+    node: AcquisitionControl/ExposureTime
+  - name: frame_rate_enable
+    type: bool
+    node: AcquisitionControl/AcquisitionFrameRateEnable
+  - name: frame_rate
+    type: float
+    node: AcquisitionControl/AcquisitionFrameRate
+
+
   #
   # -------- transport layer control (GigE)
   #
@@ -33,22 +52,20 @@ parameters:
     # default is 576. Other cameras had the option to set to 9000 to enable jumbo frames, ensure NIC MTU set >= 9000
     node: TransportLayerControl/GevSCPSPacketSize
 
+
   # 
   # ---------- FLIR Camera Control
   #
   - name: nuc_mode # Non-uniformity Control closes the shutter and recalibrates
     type: enum
-    # valid values: "Automatic" "External" "Manual"
+    # valid values: "Automatic", "External", "Manual"
     node: CameraControl/NUCMode
 
-  # 
-  # ---------- FLIR Video Control
+
   #
-  - name: image_adjust_method
+  # --------- FLIR Stream Control
+  #
+  - name: ir_frame_rate
     type: enum
-    # valid values: "PlateauHistogram" "OnceBright" "AutoBright" "Manual" "Linear"
-    node: Mono8VideoControl/ImageAdjustMethod
-  - name: video_orientation
-    type: enum
-    # valid values: "Normal" "Invert" "Revert" "InvertRevert"
-    node: Mono8VideoControl/VideoOrientation
+    # default is "Frame30Hz; valid values: "Frame60Hz", "Frame30Hz", "Frame15Hz", "Frame7Hz", "Frame4Hz"
+    node: ImageStreamControl/IRFrameRate

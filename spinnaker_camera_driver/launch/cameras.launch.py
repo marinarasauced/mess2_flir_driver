@@ -9,22 +9,19 @@ from launch_ros.substitutions import FindPackageShare
 import yaml
 
 parameters = {
-    'flir_a70': {
-        'debug': False,
-        'compute_brightness': False,
-        'adjust_timestamp': False,
-        'dump_node_map': False,
-        # --- 
-        'pixel_format': 'Mono8', #YUV422_8_UYVY
-        'gev_scps_packet_size': 1444,
-        'image_width': 640,
-        'image_height': 480,
-        'offset_x': 0,
-        'offset_y': 0,
-        'nuc_mode': 'Automatic',
-        'image_adjust_method': 'Auto',
-        'video_orientation': 'Normal',
-    },
+    'debug': False,
+    'compute_brightness': False,
+    'adjust_timestamp': False,
+    'dump_node_map': False,
+    'ir_frame_rate': 'Rate30Hz',
+    'pixel_format': 'Mono8',
+    'gev_scps_packet_size': 1444,
+    'image_width': 640,
+    'image_height': 480,
+    'offset_x': 0,
+    'offset_y': 0,
+    'nuc_mode': 'Automatic',
+    'frame_rate': 15.0,
 }
 
 
@@ -81,9 +78,7 @@ def generate_launch_description():
         [
             LaunchArg(
                 'camera_config_file',
-                default_value=PathJoinSubstitution(
-                    [FindPackageShare('spinnaker_camera_driver'), 'config', '_cameras.yaml']
-                ),
+                default_value='/home/mess2/Desktop/config/flir.yaml',
                 description='Path to the YAML file containing camera configurations.',
             ),
             OpaqueFunction(function=launch_setup),
