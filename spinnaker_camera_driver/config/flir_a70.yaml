@@ -24,6 +24,10 @@ parameters:
   - name: offset_y
     type: int
     node: ImageFormatControl/OffsetY
+  - name: image_packet_format
+    type: enum
+    # default is "H264Data; valid values: "H264Data", "ImageData"
+    node: ImageFormatControl/H264PacketFormat
 
 
   #
@@ -65,6 +69,10 @@ parameters:
   #
   # --------- FLIR Stream Control
   #
+  - name: ir_pixel_format
+    type: enum
+    # default is "Radiometric"; valid options: "Radiometric", "TemperatureLinear100mK", "TemperatureLinear10mK"
+    node: ImageStreamControl/IRFormat
   - name: ir_frame_rate
     type: enum
     # default is "Frame30Hz; valid values: "Frame60Hz", "Frame30Hz", "Frame15Hz", "Frame7Hz", "Frame4Hz"

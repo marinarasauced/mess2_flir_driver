@@ -584,6 +584,12 @@ rclcpp::Time Camera::getAdjustedTimeStamp(uint64_t t, int64_t sensorTime)
 void Camera::doPublish(const ImageConstPtr & im)
 {
   rclcpp::Time t;
+  // std::cout << "Raw image data (first 100 bytes): ";
+  // auto raw = static_cast<const uint64_t*>(im->data_);
+  // for (size_t i = 0; i < std::min(im->imageSize_, static_cast<size_t>(100)); ++i) {
+  //   std::cout << static_cast<int>(raw[i]) << " ";  // print each byte as an integer
+  // }
+  // std::cout << std::endl;
   if (synchronizer_) {
     uint64_t t_64;
     bool haveTime = synchronizer_->getTimeStamp(
